@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>COSMIC Coffee Shop - Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+<header>
+    {% include 'assets/navbar.html' %}
+</header>
+
+<main>
+    <section class="page-header content-section">
+        <h1 class="hidden">Peta Rasa Kosmik</h1>
+        <p class="hidden">Temukan minuman favorit Anda di antara bintang-bintang.</p>
+    </section>
+
+    <section id="full-menu" class="content-section">
+        <div class="menu-grid">
+
+            {% for produk in produk_list %}
+            <div class="menu-card hidden {{ produk.kategori|default('kopi') }}">
+                <img src="{{ produk.gambar }}" alt="{{ produk.nama }}" />
+                <div class="card-content">
+                    <h3>{{ produk.nama }}</h3>
+                    <p>{{ produk.deskripsi }}</p>
+                    <span class="price">Rp {{ "{:,.0f}".format(produk.harga) }}</span>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    {% include 'assets/footer.html' %}
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
